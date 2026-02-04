@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ready?</title>
+
+<style>
+/* ---------------- GLOBAL ---------------- */
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #1b2735, #090a0f);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* ---------------- STARS ---------------- */
+.star {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: white;
+  opacity: 0.8;
+  border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%,100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ---------------- MOON ---------------- */
+.moon {
+  position: absolute;
+  top: 12%;
+  right: 15%;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, #ffffff, #dddddd);
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(255,255,255,0.4);
+  transition: transform 2.5s ease-in-out;
+  z-index: 1;
+}
+
+/* Zoom animation */
+.moon.zoom {
+  transform: scale(35);
+}
+
+/* ---------------- CONTENT ---------------- */
+.container {
+  text-align: center;
+  z-index: 2;
+  transition: opacity 1.2s ease;
+}
+
+.container.fade {
+  opacity: 0;
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+/* ---------------- YES BUTTON ---------------- */
+#yesBtn {
+  background: linear-gradient(135deg, #ff5fa2, #ff9fd1);
+  color: #fff;
+  border: none;
+  padding: 16px 40px;
+  font-size: 1.2rem;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(255, 95, 162, 0.6);
+  animation: pulse 2.5s infinite;
+}
+
+#yesBtn span {
+  margin: 0 8px;
+  animation: sparkle 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes sparkle {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MOON -->
+<div class="moon" id="moon"></div>
+
+<!-- STARS -->
+<script>
+for (let i = 0; i < 90; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.animationDelay = Math.random() * 3 + "s";
+  document.body.appendChild(star);
+}
+</script>
+
+<!-- CONTENT -->
+<div class="container" id="content">
+  <h1>Ready for a surprise? 🌙</h1>
+  <button id="yesBtn">
+    <span>✨</span> YES <span>✨</span>
+  </button>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const moon = document.getElementById("moon");
+const content = document.getElementById("content");
+
+yesBtn.addEventListener("click", () => {
+  // Fade text + button
+  content.classList.add("fade");
+
+  // Zoom into the moon
+  moon.classList.add("zoom");
+
+  // Transition to next page at peak zoom
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 2600);
+});
+</script>
+
+</body>
+</html>
